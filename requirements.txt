@@ -1,0 +1,20 @@
+# Core data + analysis
+pandas>=2.3
+numpy>=2.0
+scipy>=1.13
+statsmodels>=0.14
+openpyxl>=3.1
+
+# Plotting
+matplotlib>=3.9
+seaborn>=0.13
+
+# NLP (FinBERT replication study)
+torch>=2.4
+transformers>=4.45
+
+# Free news source for FinBERT input
+yfinance>=1.2
+
+# Report generation
+python-docx>=1.1
