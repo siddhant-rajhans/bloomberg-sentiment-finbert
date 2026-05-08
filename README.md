@@ -89,6 +89,21 @@ python code/08_build_report.py           # generates the .docx
 
 The Bloomberg data is **not committed to this repo** — Bloomberg's terms of service forbid republishing their values. Code, figures, and the writeup are here.
 
+## Bloomberg Terminal evidence
+
+For anyone who wants to see what's actually on the screen when these fields are pulled, the report's Appendix A includes 8 screenshots from the Stevens FSC Bloomberg Terminal — the Related Functions menu for AAPL, the search dropdown that surfaces `TREN NSENT` (the modern entry point for news sentiment), the Most Negative / Most Positive panels rendering daily sentiment on the same `[-1, +1]` scale used in the analysis, the OEX MEMB (S&P 100 membership) list, AAPL's DES and CN pages, and the populated `.xlsm` open in Excel with the Bloomberg ribbon visible. Stored in [`figures/bloomberg_screenshots/`](figures/bloomberg_screenshots/).
+
+<table>
+<tr>
+<td><img src="figures/bloomberg_screenshots/011_news_sentiment_neg.png" alt="TREN NSENT - Most Negative"/></td>
+<td><img src="figures/bloomberg_screenshots/06_excel_bloomberg_ribbon.png" alt="Excel with Bloomberg ribbon"/></td>
+</tr>
+<tr>
+<td align="center"><i>TREN NSENT — Most Negative panel. Sent. column on the same [-1, +1] scale as <code>NEWS_SENTIMENT_DAILY_AVG</code>.</i></td>
+<td align="center"><i>The pulled workbook open in Excel with the Bloomberg ribbon active. 30 ticker tabs at the bottom, multi-field BDH output across columns.</i></td>
+</tr>
+</table>
+
 ## Repo layout
 
 ```

@@ -529,6 +529,74 @@ def main():
         size=10, space_after=8,
     )
 
+    # ---- Appendix A: Terminal evidence ----
+    add_h(doc, "Appendix A. Terminal evidence", level=1)
+    add_para(
+        doc,
+        "Screenshots from the Stevens FSC Bloomberg Terminal documenting the "
+        "data retrieval. Captured at the same workstation where the VBA pull "
+        "ran. Together they show that the sentiment field exists as a real "
+        "Bloomberg product, that the universe is documented in their data, and "
+        "that the workbook was populated from the official Excel API and not "
+        "fabricated downstream.",
+        size=10, space_after=6,
+    )
+
+    SS_DIR = FIG_DIR / "bloomberg_screenshots"
+    appendix_shots = [
+        ("00_appl_fnc_menu.png",
+         "Figure A1. Bloomberg's Related Functions Menu for AAPL US Equity. "
+         "Live ticker bar at top (293.32, +5.88) confirms an active terminal "
+         "session. The menu lists DES, CN, FA, ESG, SPLC, and the rest of the "
+         "equity-analysis stack. AI-flagged entries (CN, DS RES, FA, MODL, "
+         "DS TA, ALTD) indicate functions backed by Bloomberg's own ML."),
+        ("01_NSE_search.png",
+         "Figure A2. Searching the function namespace for \"NSE\". Bloomberg "
+         "deprecated standalone NSE; the canonical entry point for news "
+         "sentiment is now TREN NSENT (\"News Trends: News Sentiment\")."),
+        ("011_news_sentiment_neg.png",
+         "Figure A3. TREN NSENT, News Sentiment tab, Most Negative panel. The "
+         "\"Sent.\" column ranges roughly -0.4 to -0.8, on the same [-1, +1] "
+         "scale as the NEWS_SENTIMENT_DAILY_AVG field used in the analysis. "
+         "This is the same signal, rendered as a cross-sectional ranker."),
+        ("011_news_sentiment_pos.png",
+         "Figure A4. Same view, Most Positive panel. The symmetric pair of "
+         "Most Negative / Most Positive tabs is what TREN NSENT exposes "
+         "interactively; the daily aggregate per ticker is what the BDH pull "
+         "writes to disk."),
+        ("02_oem_mem.png",
+         "Figure A5. OEX Index, MEMB function. The S&P 100 constituent list "
+         "from which our 30-name universe was selected. Visible names "
+         "matching the universe: AAPL, AMZN, BA, BAC, CAT, CVX, DIS, GE, "
+         "GOOGL, GS, HD, JNJ. Empty Weight column is a benign display quirk; "
+         "the membership list itself is the evidence."),
+        ("03_appl_desc.png",
+         "Figure A6. AAPL DES (Security Description) — sector classification, "
+         "market cap, business summary. Standard \"the terminal was used\" "
+         "evidence."),
+        ("05_appl_news.png",
+         "Figure A7. AAPL CN (Company News) — the underlying news stream that "
+         "feeds NEWS_SENTIMENT_DAILY_AVG. Each headline carries a source, a "
+         "timestamp, and (in the full view) a per-story sentiment indicator. "
+         "Bloomberg's daily aggregate is the volume-weighted mean of these "
+         "per-story scores."),
+        ("06_excel_bloomberg_ribbon.png",
+         "Figure A8. The pulled workbook open in Excel with the Bloomberg "
+         "ribbon active. Visible: 30 ticker tabs at the bottom (AAPL through "
+         "VZ, plus BENCHMARKS), the per-sheet column structure (Price Date | "
+         "Price | Sentiment Date | Sentiment | Stories Date | NumStories | "
+         "MktCap Date | MktCap), and real numeric values populated from BDH. "
+         "The NumStories column shows \"#N/A Field Not Applicable\" because "
+         "NUM_NEWS_STORIES_24HR is not a valid field on this license tier "
+         "(noted in the report). The other three fields carry real data."),
+    ]
+    for fname, caption in appendix_shots:
+        path = SS_DIR / fname
+        if path.exists():
+            add_image(doc, path, width_in=6.3, caption=caption)
+        else:
+            print(f"  WARN: missing appendix screenshot {path}")
+
     # ---- References ----
     add_h(doc, "References", level=2)
     refs = [
